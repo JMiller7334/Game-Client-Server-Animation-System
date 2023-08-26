@@ -1,6 +1,6 @@
 # Client-Server Flat Ride System:
 ### Overview:
-The Client-Server Flat Ride System is an open-source system created by Jacob Miller(me) for theme-park themed ROBLOX games.
+The Client-Server Flat Ride System is an open-source system created by Jacob Miller for theme-park themed ROBLOX games.
 This system is used in my own game: Theme Park Project.
 
 I wanted to provide it to the Roblox community after I noticed several people expressing the need for a system like this. 
