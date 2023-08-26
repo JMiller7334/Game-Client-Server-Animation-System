@@ -90,11 +90,11 @@ directly from the server. The server handles no ride animations or tweening, thi
 ### Functions:
 + **function onSeated(isSeated: Bool, seat: object[Seat])** --Fires when the player sits in a flat ride. This will signal the server to start the ride's animation for this player and all other clients.
   
-+ **function runRideTweens(rideName: String, rideAnimation: object[AnimationTrack], originalHeight: number/float)** --This function handles scheduling the rides beginning and ending tweens and also any tasks that have been assigned to the ride.\
++ **function runRideTweens(rideName: String, rideAnimation: object[AnimationTrack], originalHeight: number/float)** --This function handles scheduling the rides beginning and ending tweens and also any tasks that have been assigned to the ride.
   
 + **function startRide(rideName: String)** --This function starts the ride's animation and is called when rides are started normally by the player. Note: This function is not called when resyncing.
   
-+ **function stopRides(rideName: String)** --Stop rides: Halts all rides from running for this client. Rides will appear as if they haven't been started.
++ **function stopRides(rideName: String)** --Stop rides: Halts a ride from running for this client. Rides will appear as if they haven't been started.
 
 +  **function syncRides()** --Synces all rides back with the server so that what this client sees is consistent with what other clients see in the game.
   + + BEHAVIOR: Rides with final animation tweens already running will be placed in a finished/not started state (no animation run). All rides first animation tween is skipped and the ride will placed at its goal. The final tween will play if applicable. Note: coroutines for rides being synced are created here.
