@@ -74,7 +74,7 @@ directly from the server. The server handles no ride animations or tweening, thi
 
 +  **function createRideThread(rideName: String)** --This function creates coroutines for each ride when they start.
 
-# Addtional Info:
+# Additonal Info:
 See module template scripts(code files) for additional info on setting up Module Only Rides, configuring additional Tween Animations, and setting up start/end ride tasks.
 
 
