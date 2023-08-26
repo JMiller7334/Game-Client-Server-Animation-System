@@ -63,7 +63,7 @@ See the scripts in the Module Templates folder for info on setting each of these
 + **event_manageRider(player: object[Player], character: object[Model], rideName: String)** --Remote event function that Manages who is current on each ride NOTE: This only keeps track of players who got on the ride before its animation started. Triggered by client.
 
 # Client-Side Documentation: Client_Flat_Ride
-## Notes
+### Notes
 This script handles the actual animations and tweening of rides. 
 It gets the time positions of all running rides and what rides should or shouldn't be running 
 directly from the server. The server handles no ride animations or tweening, this does that.
