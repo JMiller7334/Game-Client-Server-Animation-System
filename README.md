@@ -47,9 +47,9 @@ I wanted to provide it to the Roblox community after I noticed several people ex
 
 # Client-Side Documentation: Client_Flat_Ride
 ## Notes
-handles the actual animations and tweening of rides. 
-It gets the time positions of all running rides and what rides are running 
-directly from the server. The server handles no ride animations or tweening.
+This script handles the actual animations and tweening of rides. 
+It gets the time positions of all running rides and what rides should or shouldn't be running 
+directly from the server. The server handles no ride animations or tweening, this does that.
 
 ## Notable Properties:
 + local START_TIMER = 10 --Start-timer in secs, this should match the same variable on the server-side code.
