@@ -52,7 +52,7 @@ See the scripts in the Module Templates folder for info on setting each of these
   + .riders: array(string) --Lists the names of the current riders that had gotten on the ride before its animation started playing.
   + .run(): function --The Function that is called that will communicate to clients to start this ride's animation.
 
-## Functions:
+### Functions:
 + **function syncRides(player: object[Player]) -> returns: dictionary[string : number/float]** --Gathers the current animation times from the server and sends them to the client along with whether the ride is active.
   
   
@@ -87,7 +87,7 @@ directly from the server. The server handles no ride animations or tweening, thi
   
   + .animTrack: object[AnimationTrack] --the ride's animation after it has been loaded by the animator.
 
-## Functions
+### Functions
 + **function onSeated(isSeated: Bool, seat: object[Seat])** --Fires when the player sits in a flat ride. This will signal the server to start the ride's animation for this player and all other clients.
   
 + **function runRideTweens(rideName: String, rideAnimation: object[AnimationTrack], originalHeight: number/float)** --This function handles scheduling the rides beginning and ending tweens and also any tasks that have been assigned to the ride.\
@@ -101,5 +101,5 @@ directly from the server. The server handles no ride animations or tweening, thi
 
 +  **function createRideThread(rideName: String)** --This function creates coroutines for each ride when they start.
 
-## Contact:
+### Contact:
 **If you have questions or issues or want to report a bug please email: ThemeParkProjectGame@Gmail.com**
