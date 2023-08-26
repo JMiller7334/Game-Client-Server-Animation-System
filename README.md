@@ -63,7 +63,7 @@ See the scripts in the Module Templates folder for info on setting each of these
 + **event_manageRider(player: object[Player], character: object[Model], rideName: String)** --Remote event function that Manages who is current on each ride NOTE: This only keeps track of players who got on the ride before its animation started. Triggered by client.
 
 # Client-Side Documentation: Client_Flat_Ride
-### Notes
+### Notes:
 This script handles the actual animations and tweening of rides. 
 It gets the time positions of all running rides and what rides should or shouldn't be running 
 directly from the server. The server handles no ride animations or tweening, this does that.
@@ -79,15 +79,15 @@ directly from the server. The server handles no ride animations or tweening, thi
   
 + local TASK_FINAL_TWEEN: array (string) --List the names of rides that have tween animation that will run at the end of its standard animation.
 
-### Other Variables
+### Other Variables:
 + local rideThreads: array(coroutine) --holds existing coroutine/threads. Do not touch.
 
-### Classes
+### Classes:
 + local rideAnimations: dictionary[string : object] --Holds class instances: See class properties below.
   
   + .animTrack: object[AnimationTrack] --the ride's animation after it has been loaded by the animator.
 
-### Functions
+### Functions:
 + **function onSeated(isSeated: Bool, seat: object[Seat])** --Fires when the player sits in a flat ride. This will signal the server to start the ride's animation for this player and all other clients.
   
 + **function runRideTweens(rideName: String, rideAnimation: object[AnimationTrack], originalHeight: number/float)** --This function handles scheduling the rides beginning and ending tweens and also any tasks that have been assigned to the ride.\
