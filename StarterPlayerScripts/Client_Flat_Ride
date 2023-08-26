@@ -1,0 +1,364 @@
+--[[CLIENT SIDE FRAMEWORK:
+handles the actual animations and tweening of rides. 
+It gets the time positions of all running rides and what rides that are running 
+directly from the server. The server handles no ride animations or tweening.
+]]
+repeat wait() until game:IsLoaded()
+print("loading client_flatRide/core")
+
+local START_TIMER = 10 -- start timer in secs [delay before ride starts]
+
+-- service
+local Players = game:GetService("Players")
+local RepStore = game:GetService("ReplicatedStorage")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+
+-- remote func, events
+local funcSync = RepStore:WaitForChild("remote_flatride_sync")
+local funcStart = RepStore:WaitForChild("event_flatride_start")
+local funcStop = RepStore:WaitForChild("event_flatRide_stop")
+local funcManage = RepStore:WaitForChild("event_flatRide_manageRiders")
+
+--modules
+local tweenModule = require(RepStore.Modules.FlatRide_TweenConfig)
+local fpsModule = require(RepStore.Modules._Camera)
+
+--tweens
+local savedTweens = tweenModule.getTweens()
+local tweenGoals = tweenModule.getGoals()
+
+-- player
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local camera = game.Workspace.CurrentCamera
+
+--variables
+local currentRide = nil
+local RIDES_DISABLED = false
+
+local firstPerson = false
+local fps_connection = nil
+local camRad1, camRad2 = 0, 0
+
+-- rides that the entire players body will be hidden
+local hidePlayer = {}
+local rideThreads = {}
+
+-- listed rides will run specified tasks during first tween
+local TASK_FIRST_TWEEN = {}
+local TASK_FINAL_TWEEN = {}
+
+local MODULE_ONLY = {}
+
+--load animations
+local rideAnimations = {}
+local flatRides = game.Workspace.FlatRides
+for _, folder in pairs(flatRides:GetChildren()) do
+	local animation = folder.Animation
+	
+	local animController = folder.Ride:FindFirstChild("AnimationController")
+	if animController then
+		local animator = folder.Ride.AnimationController.Animator
+		local animTrack = animator:LoadAnimation(animation)
+		rideAnimations[folder.Name] = {}
+		rideAnimations[folder.Name].anim = animTrack
+	end
+end
+
+function onSeated(isSeated, seat)
+	if isSeated then
+		if seat then
+			local rideTag = seat:findFirstChild("Flat_Ride_Tag")
+			if rideTag and not RIDES_DISABLED then
+				currentRide = rideTag.Value
+				wait()
+				if not firstPerson then
+					if table.find(hidePlayer, rideTag.Value) then
+						fps_connection = fpsModule.enableFpsCam(player, true, camRad2, camRad1)
+					else
+						fps_connection = fpsModule.enableFpsCam(player, false, camRad2, camRad1)
+					end
+					
+					local connection					
+					connection = character.Humanoid.StateChanged:Connect(function(_oldState, newState)
+						if newState ~= Enum.HumanoidStateType.Seated then
+							fpsModule.disableFpsCam(player, true, fps_connection)
+							funcManage:FireServer(character, currentRide)
+
+							currentRide = nil
+							connection:Disconnect()
+							task.wait(10)
+							
+						end
+					end)
+					
+				end
+				funcStart:FireServer(rideTag.Value)
+				wait()
+				funcManage:FireServer(character, rideTag.Value)
+			end
+		end	
+	end
+end
+character:WaitForChild("Humanoid").Seated:connect(onSeated)
+
+
+function runRideTweens(rideName, rideAnimation, originalHeight)
+
+	--determine task module
+	local _moduleTask
+	if script:FindFirstChild(rideName) and currentRide == rideName then
+		_moduleTask = require(script[rideName])
+	end
+	
+	--[[play tweens:
+	note that original height is used to determine if the player is resyncing the ride. It is nil if resyncing
+	Resync: skips first tween animation if ride is running]]
+	if savedTweens[rideName] and #savedTweens[rideName].tween >= 1 then
+		local rideTweens = savedTweens[rideName]
+		if originalHeight then
+			rideTweens.tween[1]:Play()
+		end
+
+		-- FIRST TASKS: task module
+		if table.find(TASK_FIRST_TWEEN, rideName) and currentRide == rideName then
+			_moduleTask.task_first(player)
+		end
+		
+		local currentTime = funcSync:InvokeServer()
+		local animPosition = currentTime[rideName].animPosition -- position in seconds of the rides animation progress
+		if #rideTweens.length >= 2 then
+			
+			-- calculate when to run the tween
+			local WAIT_TIME = rideAnimation.Length - animPosition
+			WAIT_TIME -= rideTweens.length[#rideTweens.length]
+			print("WAIT TIME: @"..WAIT_TIME)
+
+
+			if WAIT_TIME > 0 then
+				wait(WAIT_TIME)
+			end
+
+			--FINAL TASKS: task module
+			if table.find(TASK_FINAL_TWEEN, rideName) and currentRide == rideName then
+				_moduleTask.task_final(player, originalHeight, fps_connection)
+			end
+			
+			if RIDES_DISABLED then
+				coroutine.yield()
+			end
+			rideTweens.tween[#rideTweens.tween]:Play()
+			wait(rideTweens.length[#rideTweens.length])
+		end
+	end
+end
+
+
+--[[start the rides(coroutine):
+this function starts the rides animation and is called when
+rides are started normally by the player.
+
+this function is not called when resyncing.
+]]
+function startRide(rideName)
+	if rideAnimations[rideName] then
+		if RIDES_DISABLED then
+			print("client_flatride: RIDES DISABLED")
+			return
+		end
+		
+		local rideModel = flatRides[rideName]
+		
+		local originalHeight = player.Character.HumanoidRootPart.Position.Y
+		
+		-- UI STUFF
+		local UI = nil
+		local connection = nil
+		if currentRide == rideName then
+			UI = Instance.new("ScreenGui")
+			--ui styling
+			local UI_text = Instance.new("TextLabel")
+			UI_text.Font = Enum.Font.TitilliumWeb
+			UI_text.Text = tostring(START_TIMER)
+			UI_text.TextScaled = true
+			UI_text.TextColor = BrickColor.new(1, 0.666667, 0)
+			UI_text.BackgroundTransparency = 1
+			
+			UI_text.AnchorPoint = Vector2.new(0.5, 0.5)
+			UI_text.Position = UDim2.new(0.5, 0, 0.5, 0)
+			UI_text.Size = UDim2.new(0, 300, 0, 300)
+			UI_text.Parent = UI
+			UI.Parent = player.PlayerGui
+			
+			--ui updater
+			connection = rideModel.Countdown.Changed:Connect(function()
+				if not RIDES_DISABLED then
+					UI_text.Text = tostring(rideModel.Countdown.Value)
+				else
+					UI_text.Text = ("RIDES DISABLED")
+				end
+			end)
+		end
+	
+		while rideModel.Countdown.Value > 0 do
+			wait()
+		end
+		
+		if connection then
+			UI:Destroy()
+			connection:Disconnect()
+		end
+		
+		--HANDLING ANIMATIONS
+		--play animation
+		if not RIDES_DISABLED then
+			local rideAnimation = rideAnimations[rideName].anim	
+			rideAnimation:Play()
+			
+			--play tweens		
+			runRideTweens(rideName, rideAnimation, originalHeight)
+		end
+		
+	else
+		--module only rides start from here.
+		if table.find(MODULE_ONLY, rideName) then			
+			print("client_flatRide: MODULE ONLY - "..rideName)
+			local rideModule = require(script:FindFirstChild(rideName))
+			rideModule.start()
+			return
+		end
+	end
+end
+
+
+--[[stop rides:
+Halts all rides from running for this client.
+rides will appear as if they haven't been started.
+]]
+function stopRides(rideName)
+	if table.find(MODULE_ONLY, rideName) then
+		local rideModule = require(script:FindFirstChild(rideName))
+		rideModule.stop()
+	else
+		print("client_flatRide: HALT@"..rideName)
+		RIDES_DISABLED = true
+		if rideThreads[rideName] then
+			rideAnimations[rideName].anim:Stop()
+			if savedTweens[rideName] then
+				for _, v in pairs(savedTweens[rideName].tween) do
+					v:Cancel()
+				end
+			end
+			if tweenGoals[rideName] then
+				print("client_flatride: RESETTING RIDE")
+				local goals = tweenGoals[rideName]
+				local finalPart = goals.part[#goals.part]
+				local finalCf = goals.cframe[#goals.cframe]
+				flatRides[rideName].Ride[finalPart].CFrame = finalCf
+			end
+		end
+	end
+end
+funcStop.OnClientEvent:Connect(stopRides) -- this is called by the server to stop Module only rides.
+
+
+--[[SYNC RIDES BACK TO SERVER
+	synces all rides back with the server so that what this client sees is consistent with 
+	what other clients see in game.
+
+BEHAVOR:
+	rides with final animation tweens already running will be placed in a finished/not started state (no animation run).
+	all rides first animation tween is skipped and the ride will placed at it's goal. final tween will play if applicable.
+	
+	coroutines for rides being synced are created here.
+]]
+
+function syncRides()
+	if not RIDES_DISABLED then return end
+	local currentTime = funcSync:InvokeServer()
+	RIDES_DISABLED = false
+	for _, rideFolder in pairs(flatRides:GetChildren()) do
+		local animPosition = currentTime[rideFolder.Name].animPosition -- position in seconds of the rides animation progress from the server
+		if currentTime[rideFolder.Name].active and not table.find(MODULE_ONLY, rideFolder.Name) then
+			local rideTweens = savedTweens[rideFolder.Name]
+			
+			--[[only run the rides animation if theres enough time to atleast play the final tween]]
+			if not rideTweens or #rideTweens.tween <= 1 or (rideTweens and 
+				#rideTweens.tween > 1 and animPosition < rideAnimations[rideFolder.Name].anim.Length - rideTweens.length[#rideTweens.length]) then
+				
+				print("client_flatRide: syncing-"..rideFolder.Name)
+				rideAnimations[rideFolder.Name].anim:Play()
+				rideAnimations[rideFolder.Name].anim.TimePosition = animPosition
+
+				if rideTweens and #rideTweens.tween >= 1 then
+					local goals = tweenGoals[rideFolder.Name]
+					local tweenPart = goals.part[1]
+					local tweenCf = goals.cframe[1]
+					flatRides[rideFolder.Name].Ride[tweenPart].CFrame = tweenCf
+					
+					
+					local newThread = coroutine.create(runRideTweens)
+					rideThreads[rideFolder.Name] = newThread
+					coroutine.resume(newThread, rideFolder.Name, rideAnimations[rideFolder.Name].anim, nil)
+				end
+			end
+		end
+	end
+end
+
+
+--[[RIDE THREAD CREATION:
+this function creates coroutines for each ride when they
+start.
+]]
+function createRideThread(rideName)
+	local newThread = coroutine.create(startRide)
+	rideThreads[rideName] = newThread
+	coroutine.resume(newThread, rideName)
+end
+
+funcStart.OnClientEvent:Connect(createRideThread)
+
+
+
+-- initial ride sync
+game.Workspace:WaitForChild("FlatRides")
+print("client_flat_ride: INIT, SYNC")
+syncRides()
+
+
+
+--[[SYNC & DESYNC
+it is recommended to place any or all function that sync or desync/stop rides below this commented section
+
+IMPORTANT:
+**when syncing: it is recommend to check that the variable RIDES_DISABLED is true in your conditions.
+***when stopping/pausing rides: it is recommended that you check if the variable RIDES_DISABLED is false in your condtions.
+]]
+
+
+-- SYNC TEST FUNC [used for testing stopping and syncing; uncomment function to use]
+
+--[[local UserInputService = game:GetService("UserInputService")
+UserInputService.InputBegan:Connect(function(input, processed)
+	print("input")
+	if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.K then
+		for _, folder in pairs(flatRides:GetChildren()) do
+			stopRides(folder.Name)
+		end
+		print("STOP")
+	elseif input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.J then
+		syncRides()
+		print("SYNC")
+		
+	elseif input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.H then
+		print("RUN ALL")
+		for _, folder in pairs(flatRides:GetChildren()) do
+			funcStart:FireServer(folder.Name)
+		end
+		
+	end
+end)]]
+
+
