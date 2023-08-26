@@ -101,5 +101,5 @@ directly from the server. The server handles no ride animations or tweening, thi
 
 +  **function createRideThread(rideName: String)** --This function creates coroutines for each ride when they start.
 
-# Contact:
+## Contact:
 **If you have questions or issues or want to report a bug please email: ThemeParkProjectGame@Gmail.com**
