@@ -58,7 +58,7 @@ See the scripts in the Module Templates folder for info on setting each of these
   
 + **function runRide(ride: ClassRides[string])** --handles updating ride animations times and Ride.riders. This function is called on its own thread.
   
-+ **event_RideStart(rideName: String)** --Remote event function. signals clients to run ride animation this function signals the clients to start their ride animations. This function also handles updating the countdown time for the ride. Triggered by client.
++ **event_RideStart(rideName: String)** --Remote event function. Signals the clients to start their ride animations. This function also handles updating the countdown time for the ride. Triggered by client.
   
 + **event_manageRider(player: object[Player], character: object[Model], rideName: String)** --Remote event function that Manages who is current on each ride NOTE: This only keeps track of players who got on the ride before its animation started. Triggered by client.
 
