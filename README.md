@@ -9,14 +9,14 @@ I wanted to provide it to the Roblox community after I noticed several people ex
 As such I have opened sourced this project.
 
 ### Installation:
-+ 1: Ensure there is a folder name 'FlatRides' that is parented to Workspace
++ 1: Ensure there is a folder named 'FlatRides' that is parented to game.Workspace
 + 2: Ensure that there is a folder in ReplicatedStorage called 'Modules' and that the modules '_Camera' and 'FlatRide_TweenConfig' are inside that folder.
 + 3: Ensure that 'Client_Flat_Ride' is placed into StarterPlayer -> StarterPlayerScripts.
 
-+ 4: The system is installed: See below on how to configure your rides to work with the system.
++ 4: The system is installed: See below for how to configure your rides to work with the system.
 
 ### Ride Configuration:
-+ 1: Create a new folder and name it after the ride you wish to install; place it inside the "FlatRides" folder in Workspace that you created during installation.
++ 1: Create a new folder and name it after the ride you wish to install; place it inside the "FlatRides" folder in game.Workspace that you created during installation.
 + 2: Place the animation for the ride directly into the folder you created at step 1 of ride configuration.
 + 3: Make sure all parts of your flat ride are housed in a model called "Ride". This is case-sensitive This needs to be placed directly in the folder you placed the animation into at step 2.
 + 4: Ensure that all instances of Seat are placed in the "Ride" model, you can have any number of seats but name them "Seat1", "Seat2", ... counting up accordingly.
