@@ -17,14 +17,14 @@ As such I have opened sourced this project.
 + 5: The system is installed: See below for how to configure your rides to work with the system.
 
 ### Ride Configuration:
-+ 1: Create a new folder in the FlatRides folder in game.Workspace and name it after the ride you wish to install.
++ 1: Create a new folder in the FlatRides folder in game.Workspace and give it a name. This name should be unique.
 + 2: Place the animation for the ride directly into the folder you created in the previous step.
-+ 3: Make sure all parts of your flat ride are housed in a model called "Ride". This is case-sensitive and needs to be placed directly in the folder you placed the animation into at step 2.
-+ 4: Ensure that all instances of Seat are placed in the "Ride" model, you can have any number of seats but name them "Seat1", "Seat2", ... counting up accordingly.
++ 3: Make sure all parts of your flat ride are housed in a model called "Ride". This is case-sensitive and needs to be placed directly in the folder you created at step 1 of ride configuration.
++ 4: Ensure that all instances of Seat are placed in the "Ride" model. You can have any number of seats but name them "Seat1", "Seat2", ... counting up accordingly.
 + 5: Ensure there is an instance of AnimationController called "AnimationController" inside the "Ride" model
 + 6: Ensure there is an instance of an Animator called "Animator" located directly inside the AnimationController mentioned in the previous step.
 
-+ 7: Your ride is configured! If the system is configured it should run when your character sits in it.
++ 7: Your ride is configured! If the system is configured it should run when your avatar sits in it.
 **All rides should have their own folders and unique names for each folder that they are housed in.
 
 ### (Optional) Configuration of Tween Animations, Module Only Rides, Ride Tasks:
