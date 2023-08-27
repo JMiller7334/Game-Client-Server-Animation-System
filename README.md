@@ -16,7 +16,7 @@ As such I have opened sourced this project.
 + 4: The system is installed: See below for how to configure your rides to work with the system.
 
 ### Ride Configuration:
-+ 1: Create a new folder and name it after the ride you wish to install; place it inside the "FlatRides" folder in game.Workspace that you created during installation.
++ 1: Create a new folder and name it after the ride you wish to install. Place this new folder inside the "FlatRides" folder in game.Workspace that you created during installation.
 + 2: Place the animation for the ride directly into the folder you created at step 1 of ride configuration.
 + 3: Make sure all parts of your flat ride are housed in a model called "Ride". This is case-sensitive This needs to be placed directly in the folder you placed the animation into at step 2.
 + 4: Ensure that all instances of Seat are placed in the "Ride" model, you can have any number of seats but name them "Seat1", "Seat2", ... counting up accordingly.
