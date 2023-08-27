@@ -12,7 +12,7 @@ As such I have opened sourced this project.
 + 1: Ensure there is a folder named 'FlatRides' that is parented to game.Workspace
 + 2: Ensure that there is a folder in ReplicatedStorage called 'Modules' and that the scripts '_Camera' and 'FlatRide_TweenConfig' are inside that folder and are classed as ModuleScripts.
 + 3: Ensure that 'Client_Flat_Ride' is placed into StarterPlayer -> StarterPlayerScripts and that it is classed as LocalScript.
-+ 4: Ensure 'FlatrideSystem_System' is placed into game.ServerScriptStorage and is classed as a Script.
++ 4: Ensure 'FlatRide_System' is placed into game.ServerScriptStorage and is classed as a Script.
 
 + 5: The system is installed: See below for how to configure your rides to work with the system.
 
