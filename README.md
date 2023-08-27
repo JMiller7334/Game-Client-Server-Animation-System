@@ -26,7 +26,7 @@ As such I have opened sourced this project.
 
 ### (Optional) Configuration of Tween Animations, Module Only Rides, Ride Tasks:
 See the scripts in the Module Templates folder for info on setting each of these features up.
-+ Tween Animations: Run tween animations alongside standard animations. Up to 2 tween animations. Tween animations will automatically be scheduled to run at the beginning of the ride animation and the second will be scheduled to run so it finishes as the ride's standard animation finishes.
++ Tween Animations: Run tween animations alongside standard animations. Up to 2 tween animations. First tween animations will automatically be scheduled to run at the beginning of the ride animation and the second will be scheduled to run so it finishes as the ride's standard animation finishes.
 
 + Module Only Rides: Run a ride without a standard animation using only a module script.
 
