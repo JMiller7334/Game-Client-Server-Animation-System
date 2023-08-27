@@ -39,7 +39,7 @@ See the scripts in the Module Templates folder for info on setting each of these
 
 # Server-Side Documentation: FlatRide_System
 ### Configurable Variables:
-+ local START_TIMER: int  --sets the delay and countdown time before the ride begins running. This must adjusted in the client-side code as well.
++ local START_TIMER: int  --sets the delay and countdown time before the ride begins running after a player enters it. This must adjusted in the client-side code as well.
 + local MODULE_ONLY: array(string) --Lists the names of the rides that operate using only module scripts.
 
 ### Classes:
