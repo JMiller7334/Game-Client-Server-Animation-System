@@ -25,7 +25,6 @@ As such I have opened sourced this project.
 + 6: Ensure there is an instance of an Animator called "Animator" located directly inside the AnimationController mentioned in the previous step.
 
 + 7: Your ride is configured! If the system is configured it should run when your avatar sits in it.
-  + All rides should have their own folders and unique names for each folder that they are housed in.
 
 ### (Optional) Configuration of Tween Animations, Module Only Rides, Ride Tasks:
 See the scripts in the Module Templates folder for info on setting each of these features up.
