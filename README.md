@@ -77,9 +77,9 @@ directly from the server. The server handles no ride animations or tweening, thi
   
 + local hidePlayer: array(string) --List here the names of rides where the players' entire body should be hidden while they are on it.
   
-+ local TASK_FIRST_TWEEN: array(string) --List the names of rides that have tween animation that will run at the beginning of its standard animation.
++ local TASK_FIRST_TWEEN: array(string) --List the names of rides that have a tween animation that will run at the beginning of its standard animation.
   
-+ local TASK_FINAL_TWEEN: array (string) --List the names of rides that have tween animation that will run at the end of its standard animation.
++ local TASK_FINAL_TWEEN: array (string) --List the names of rides that have a tween animation that will run at the end of its standard animation.
 
 ### Other Variables:
 + local rideThreads: array(coroutine) --holds existing coroutine/threads. Do not touch.
