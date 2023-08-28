@@ -90,7 +90,7 @@ directly from the server. The server handles no ride animations or tweening, thi
   + .animTrack: object[AnimationTrack] --the ride's animation after it has been loaded by the animator.
 
 ### Functions:
-+ **function onSeated(isSeated: Bool, seat: object[Seat])** --Fires when the player sits in a flat ride. This will signal the server to start the ride's animation for this player and all other clients.
++ **function onSeated(isSeated: Boolean, seat: object[Seat])** --Fires when the player sits in a flat ride. This will signal the server to start the ride's animation for this player and all other clients.
   
 + **function runRideTweens(rideName: String, rideAnimation: object[AnimationTrack], originalHeight: number/float)** --This function handles scheduling the rides beginning and ending tweens and also any tasks that have been assigned to the ride.
   
