@@ -99,7 +99,7 @@ directly from the server. The server handles no ride animations or tweening, thi
 + **function stopRides(rideName: String)** --Stop rides: Halts a ride from running for this client. Rides will appear as if they haven't been started.
 
 +  **function syncRides()** --Synces all rides back with the server so that what this client sees is consistent with what other clients see in the game.
-  + + **Sync behavior:** Rides with final animation tweens already running will be placed in a finished/not started state (no animation run). All rides first animation tween is skipped and the ride will placed at its goal. The final tween will play if applicable. Note: coroutines for rides being synced are created here.
+  + + **Sync behavior:** Rides with final tween animation already running will be placed in a finished/not started state (no animation run). Rides with tween animations will have their first tween animation skipped and the ride will placed at its tween goal. The final tween will play if applicable. Note: coroutines for rides being synced are created here.
 
 +  **function createRideThread(rideName: String)** --This function handles coroutines for each ride when they start.
 
