@@ -19,7 +19,7 @@ As such I have opened sourced this project.
 ### Ride Configuration:
 + 1: Create a new folder in the FlatRides folder in game.Workspace and give it a name. This name should be unique.
 + 2: Place the animation for the ride directly into the folder you created in the previous step.
-+ 3: Make sure all parts of your flat ride are housed in a model called "Ride". This is case-sensitive and needs to be placed directly in the folder you created at step 1 of ride configuration.
++ 3: Make sure all parts of your flat ride are housed in a model called "Ride". This needs to be placed directly in the folder you created at step 1 of ride configuration.
 + 4: Ensure that all instances of Seat are placed in the "Ride" model. You can have any number of seats but name them "Seat1", "Seat2", ... counting up accordingly.
 + 5: Ensure there is an instance of AnimationController called "AnimationController" inside the "Ride" model
 + 6: Ensure there is an instance of an Animator called "Animator" located directly inside the AnimationController mentioned in the previous step.
