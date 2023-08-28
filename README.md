@@ -10,7 +10,7 @@ As such I have opened sourced this project.
 
 ### Installation:
 + 1: Ensure there is a folder named 'FlatRides' that is parented to game.Workspace
-+ 2: Ensure that there is a folder in game.ReplicatedStorage called 'Modules' and that the scripts '_Camera' and 'FlatRide_TweenConfig' are inside that folder. They should be classed as ModuleScripts.
++ 2: Ensure that there is a folder in game.ReplicatedStorage called 'Modules' and the scripts '_Camera' and 'FlatRide_TweenConfig' are inside that folder. They should be classed as ModuleScripts.
 + 3: Ensure that 'Client_Flat_Ride' is placed into game.StarterPlayer.StarterPlayerScripts and that it is classed as a LocalScript.
 + 4: Ensure 'FlatRide_System' is placed into game.ServerScriptStorage and is classed as a Script.
 
@@ -25,11 +25,11 @@ As such I have opened sourced this project.
 + 6: Ensure there is an instance of an Animator called "Animator" located directly inside the AnimationController mentioned in the previous step.
 
 + 7: Your ride is configured! If the system is configured it should run when your avatar sits in it.
-**All rides should have their own folders and unique names for each folder that they are housed in.
+  + **All rides should have their own folders and unique names for each folder that they are housed in.**
 
 ### (Optional) Configuration of Tween Animations, Module Only Rides, Ride Tasks:
 See the scripts in the Module Templates folder for info on setting each of these features up.
-+ Tween Animations: Run tween animations alongside standard animations. Up to 2 tween animations. First tween animations will automatically be scheduled to run at the beginning of the ride animation and the second will be scheduled to run so it finishes as the ride's standard animation finishes.
++ Tween Animations: Run tween animations alongside standard animations. Up to 2 tween animations. The first tween animations will automatically be scheduled to run at the beginning of the ride animation and the second will be scheduled to run so it finishes as the ride's standard animation finishes.
 
 + Module Only Rides: Run a ride without a standard animation using only a module script.
 
