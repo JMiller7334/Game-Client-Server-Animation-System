@@ -8,10 +8,18 @@ The system allows for the client-side to handle all ride animations, this increa
 I wanted to provide it to the Roblox community after I noticed several people expressing the need for a system like this. 
 As such I have opened sourced this project.
 
+### Github Links (This Project):
+* [Server: FlatRide_System](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ServerScriptStorage/FlatRide_System.lua)
+* [Client: Client_Flat_Ride](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/StarterPlayerScripts/Client_Flat_Ride)
+* [Module: _Camera](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ReplicatedStorage/Modules/_Camera.lua)
+* [Module: Tween_Config](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ReplicatedStorage/Modules/FlatRide_TweenConfig.lua)
+* [Module: Module_Only - Configurable](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ModuleTemplates%5BPlace%20into%20Client_Flat_Ride%5D/MODULE_ONLY_TEMPLATE.lua)
+* [Module: Ride_Tasks - Configurable](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ModuleTemplates%5BPlace%20into%20Client_Flat_Ride%5D/RIDE_TASK_TEMPLATE.lua)
+
 ### Installation:
 + 1: Ensure there is a folder named 'FlatRides' that is parented to game.Workspace
 + 2: Ensure that there is a folder in game.ReplicatedStorage called 'Modules' and the scripts '_Camera' and 'FlatRide_TweenConfig' are inside that folder. They should be classed as ModuleScripts.
-+ 3: Ensure that 'Client_Flat_Ride' is placed into game.StarterPlayer.StarterPlayerScripts and that it is classed as a LocalScript.
++ 3: Ensure that 'Client_Flat_Ride' is placed into game.StarterPlayer.StarterPlayerScripts and that it is classed as a LocalScript and that both template module scripts are parented to 'Client_Flat_Ride' and are classed as ModuleScripts.
 + 4: Ensure 'FlatRide_System' is placed into game.ServerScriptStorage and is classed as a Script.
 
 + 5: The system is installed: See below for how to configure your rides to work with the system.
@@ -39,7 +47,7 @@ See the scripts in the Module Templates folder for info on setting each of these
 + **Demo: ThemeParkProject Game:** [https://www.roblox.com/games/636542147/Theme-Park-Project-Beta](https://www.roblox.com/games/636542147/Theme-Park-Project-Beta)
 
 
-# Server-Side Documentation: FlatRide_System
+# Server-Side Documentation: [FlatRide_System](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ServerScriptStorage/FlatRide_System.lua)
 ### Configurable Variables:
 + local START_TIMER: int  --sets the delay and countdown time before the ride begins running after a player enters it. This must adjusted in the client-side code as well.
 + local MODULE_ONLY: array(string) --List here the names of the rides that operate using only module scripts.
@@ -64,7 +72,7 @@ See the scripts in the Module Templates folder for info on setting each of these
   
 + **event_manageRider(player: object[Player], character: object[Model], rideName: String)** --Remote event function that Manages who is current on each ride NOTE: This only keeps track of players who got on the ride before its animation started. Triggered by client.
 
-# Client-Side Documentation: Client_Flat_Ride
+# Client-Side Documentation: [Client_Flat_Ride](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/StarterPlayerScripts/Client_Flat_Ride)
 ### Notes:
 This script handles the actual animations and tweening of rides. 
 It gets the time positions of all running rides and what rides should or shouldn't be running 
