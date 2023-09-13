@@ -8,7 +8,13 @@ The system allows for the client-side to handle all ride animations, this increa
 I wanted to provide it to the Roblox community after I noticed several people expressing the need for a system like this. 
 As such I have opened sourced this project.
 
-### Github Links (This Project):
+### Notes:
+* This system untilizes multi-threading.
+* Animations handled by client and not server.
+* Animation timing & syncing handled by server.
+* Proper client/server practices applied.
+
+## Github Code Links (This Project):
 * [Server: FlatRide_System](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ServerScriptStorage/FlatRide_System.lua)
 * [Client: Client_Flat_Ride](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/StarterPlayerScripts/Client_Flat_Ride)
 * [Module: _Camera](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ReplicatedStorage/Modules/_Camera.lua)
@@ -16,7 +22,11 @@ As such I have opened sourced this project.
 * [Module: Module_Only - Configurable](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ModuleTemplates%5BPlace%20into%20Client_Flat_Ride%5D/MODULE_ONLY_TEMPLATE.lua)
 * [Module: Ride_Tasks - Configurable](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ModuleTemplates%5BPlace%20into%20Client_Flat_Ride%5D/RIDE_TASK_TEMPLATE.lua)
 
-### Installation:
+## Related Links & Demos:
++ **Website: ThemeParkProject:** [https://themeparkproject.com/](https://themeparkproject.com/)
++ **Demo: ThemeParkProject Game:** [https://www.roblox.com/games/636542147/Theme-Park-Project-Beta](https://www.roblox.com/games/636542147/Theme-Park-Project-Beta)
+
+## Installation:
 + 1: Ensure there is a folder named 'FlatRides' that is parented to game.Workspace
 + 2: Ensure that there is a folder in game.ReplicatedStorage called 'Modules' and the scripts '_Camera' and 'FlatRide_TweenConfig' are inside that folder. They should be classed as ModuleScripts.
 + 3: Ensure that 'Client_Flat_Ride' is placed into game.StarterPlayer.StarterPlayerScripts and that it is classed as a LocalScript and that both template module scripts are parented to 'Client_Flat_Ride' and are classed as ModuleScripts.
@@ -24,7 +34,7 @@ As such I have opened sourced this project.
 
 + 5: The system is installed: See below for how to configure your rides to work with the system.
 
-### Ride Configuration:
+## Ride Configuration:
 + 1: Create a new folder in the FlatRides folder in game.Workspace and give it a name. This name should be unique.
 + 2: Place the animation for the ride directly into the folder you created in the previous step.
 + 3: Make sure all parts of your flat ride are housed in a model called "Ride". This needs to be placed directly in the folder you created at step 1 of ride configuration.
@@ -34,18 +44,13 @@ As such I have opened sourced this project.
 
 + 7: Your ride is configured! If the system is configured it should run when your avatar sits in it.
 
-### (Optional) Configuration of Tween Animations, Module Only Rides, Ride Tasks:
+## (Optional) Configuration of Tween Animations, Module Only Rides, Ride Tasks:
 See the scripts in the Module Templates folder for info on setting each of these features up.
 + Tween Animations: Run tween animations alongside standard animations. Up to 2 tween animations. The first tween animations will automatically be scheduled to run at the beginning of the ride animation and the second will be scheduled to run so it finishes as the ride's standard animation finishes.
 
 + Module Only Rides: Run a ride without a standard animation using only a module script.
 
 + Ride Tasks (requires at least 1 Tween animation configured): Run a task parallel to a tween animation. Up to 1 task per tween.
-
-## Related Links & Demos:
-+ **Website: ThemeParkProject:** [https://themeparkproject.com/](https://themeparkproject.com/)
-+ **Demo: ThemeParkProject Game:** [https://www.roblox.com/games/636542147/Theme-Park-Project-Beta](https://www.roblox.com/games/636542147/Theme-Park-Project-Beta)
-
 
 # Server-Side Documentation: [FlatRide_System](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ServerScriptStorage/FlatRide_System.lua)
 ### Configurable Variables:
