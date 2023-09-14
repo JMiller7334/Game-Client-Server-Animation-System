@@ -8,10 +8,10 @@ The system allows for the client-side to handle all ride animations, this increa
 I wanted to provide it to the Roblox community after I noticed several people expressing the need for a system like this. 
 As such I have opened sourced this project.
 
-### Notes:
+### System Info:
 * This system untilizes multi-threading.
 * Animations handled by client and not server.
-* Animation timing & syncing handled by server.
+* Animation timing/monitoring managed by the server.
 * Proper client/server practices applied.
 
 ## Github Code Links (This Project):
