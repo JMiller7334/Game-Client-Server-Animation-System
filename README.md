@@ -13,6 +13,7 @@ As such I have opened sourced this project.
 * Animations handled by client and not server.
 * Animation timing/monitoring managed by the server.
 * Proper client/server practices applied.
+* Plug & play: UI, ride starting & stopping is handled for all your rides automatically. Simply include them in the flatRides directory.
 
 ## Github Code Links (This Project):
 * [Server: FlatRide_System](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ServerScriptStorage/FlatRide_System.lua)
