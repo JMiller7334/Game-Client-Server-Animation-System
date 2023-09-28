@@ -26,6 +26,7 @@ As such I have opened sourced this project.
 ## Related Links & Demos:
 + **Offical Website:** [https://themeparkproject.com/pages/opensource](https://themeparkproject.com/pages/opensource.html)
 + **Offical Game:** [https://www.roblox.com/games/636542147/Theme-Park-Project-Beta](https://www.roblox.com/games/636542147/Theme-Park-Project-Beta)
++ **Youtube Tutorial:** https://youtu.be/I-so6Pl_LNM
 
 ## Installation:
 + 1: Ensure there is a folder named 'FlatRides' that is parented to game.Workspace
