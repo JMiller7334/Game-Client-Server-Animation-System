@@ -55,28 +55,28 @@ See the scripts in the Module Templates folder for info on setting each of these
 
 # Server-Side Documentation: [FlatRide_System](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ServerScriptStorage/FlatRide_System.lua)
 ### Configurable Variables:
-+ local START_TIMER: int  --sets the delay and countdown time before the ride begins running after a player enters it. This must adjusted in the client-side code as well.
-+ local MODULE_ONLY: array(string) --List here the names of the rides that operate using only module scripts.
++ ```local START_TIMER: int```  : sets the delay and countdown time before the ride begins running after a player enters it. This must adjusted in the client-side code as well.
++ ```local MODULE_ONLY: array(string)``` : List here the names of the rides that operate using only module scripts.
 
 ### Classes:
-+ local ClassRides: dictionary[string : object] --Holds class instances. See class properties below.
++ ```local ClassRides: dictionary[string : object]``` :Holds class instances. See class properties below.
   
-  + .name: string --unique identifier of the ride, same as the rides folder name.
-  + .animLength: number/float --Total time in seconds of the ride's animation length.
-  + .animPosition: number/float --Current time position of the ride's animation.
-  + .active: boolean --Is set according to whether or not the ride is currently running
-  + .riders: array(string) --Lists the names of the current riders that had gotten on the ride before its animation started playing.
-  + .run(): function --The Function that is called that will communicate to clients to start this ride's animation.
+  + ```.name: string``` : unique identifier of the ride, same as the rides folder name.
+  + ```.animLength: number/float``` : Total time in seconds of the ride's animation length.
+  + ```.animPosition: number/float``` : Current time position of the ride's animation.
+  + ```.active: boolean``` : Is set according to whether or not the ride is currently running
+  + ```.riders: array(string)``` : Lists the names of the current riders that had gotten on the ride before its animation started playing.
+  + ```.run(): function``` : The Function that is called that will communicate to clients to start this ride's animation.
 
 ### Functions:
-+ **function syncRides(player: object[Player]) -> returns: dictionary[string : number/float]** --Gathers the current animation times from the server and sends them to the client along with whether the ride is active.
++ ```function syncRides(player: object[Player]) -> returns: dictionary[string : number/float]``` : Gathers the current animation times from the server and sends them to the client along with whether the ride is active.
   
   
-+ **function runRide(ride: ClassRides[string])** --handles updating ride animations times and Ride.riders. This function is called on its own thread.
++ ```function runRide(ride: ClassRides[string])``` : handles updating ride animations times and Ride.riders. This function is called on its own thread.
   
-+ **event_RideStart(rideName: String)** --Remote event function. Signals the clients to start their ride animations. This function also handles updating the countdown time for the ride. Triggered by client.
++ ```event_RideStart(rideName: String)``` : Remote event function. Signals the clients to start their ride animations. This function also handles updating the countdown time for the ride. Triggered by client.
   
-+ **event_manageRider(player: object[Player], character: object[Model], rideName: String)** --Remote event function that Manages who is current on each ride NOTE: This only keeps track of players who got on the ride before its animation started. Triggered by client.
++ ```event_manageRider(player: object[Player], character: object[Model], rideName: String)``` :Remote event function that Manages who is current on each ride NOTE: This only keeps track of players who got on the ride before its animation started. Triggered by client.
 
 # Client-Side Documentation: [Client_Flat_Ride](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/StarterPlayerScripts/Client_Flat_Ride)
 ### Notes:
@@ -85,37 +85,37 @@ It gets the time positions of all running rides and what rides should or shouldn
 directly from the server. The server handles no ride animations or tweening, this does that.
 
 ### Configurable Variables:
-+ local START_TIMER: int --Start-timer in seconds, this should match the same variable on the server-side code.
++ ```local START_TIMER: int``` : Start-timer in seconds, this should match the same variable on the server-side code.
   
-+ local MODULE_ONLY: array(string) --List here the names of rides that run solely using Cframe or any other type of animation that is not a standard animation.
++ ```local MODULE_ONLY: array(string)``` : List here the names of rides that run solely using Cframe or any other type of animation that is not a standard animation.
   
-+ local hidePlayer: array(string) --List here the names of rides where the players' entire body should be hidden while they are on it.
++ ```local hidePlayer: array(string)``` : List here the names of rides where the players' entire body should be hidden while they are on it.
   
-+ local TASK_FIRST_TWEEN: array(string) --List the names of rides that have a tween animation that will run at the beginning of its standard animation.
++ ```local TASK_FIRST_TWEEN: array(string)``` : List the names of rides that have a tween animation that will run at the beginning of its standard animation.
   
-+ local TASK_FINAL_TWEEN: array(string) --List the names of rides that have a tween animation that will run at the end of its standard animation.
++ ```local TASK_FINAL_TWEEN: array(string)``` : List the names of rides that have a tween animation that will run at the end of its standard animation.
 
 ### Other Variables:
-+ local rideThreads: array(coroutine) --holds existing coroutine/threads. Do not touch.
++ ```local rideThreads: array(coroutine)``` : holds existing coroutine/threads. Do not touch.
 
 ### Classes:
-+ local rideAnimations: dictionary[string : object] --Holds class instances: See class properties below.
++ ```local rideAnimations: dictionary[string : object]``` : Holds class instances: See class properties below.
   
-  + .animTrack: object[AnimationTrack] --the ride's animation after it has been loaded by the animator.
+  + ```.animTrack: object[AnimationTrack]``` : the ride's animation after it has been loaded by the animator.
 
 ### Functions:
-+ **function onSeated(isSeated: Boolean, seat: object[Seat])** --Fires when the player sits in a flat ride. This will signal the server to start the ride's animation for this player and all other clients.
++ ```function onSeated(isSeated: Boolean, seat: object[Seat])``` : Fires when the player sits in a flat ride. This will signal the server to start the ride's animation for this player and all other clients.
   
-+ **function runRideTweens(rideName: String, rideAnimation: object[AnimationTrack], originalHeight: number/float)** --This function handles scheduling the rides beginning and ending tweens and also any tasks that have been assigned to the ride.
++ ```function runRideTweens(rideName: String, rideAnimation: object[AnimationTrack], originalHeight: number/float)``` : This function handles scheduling the rides beginning and ending tweens and also any tasks that have been assigned to the ride.
   
-+ **function startRide(rideName: String)** --This function starts the ride's animation and is called when rides are started normally by the player. Note: This function is not called when resyncing.
++ ```function startRide(rideName: String)``` : This function starts the ride's animation and is called when rides are started normally by the player. Note: This function is not called when resyncing.
   
-+ **function stopRides(rideName: String)** --Stop rides: Halts a ride from running for this client. Rides will appear as if they haven't been started.
++ ```function stopRides(rideName: String)``` : Stop rides: Halts a ride from running for this client. Rides will appear as if they haven't been started.
 
-+  **function syncRides()** --Synces all rides back with the server so that what this client sees is consistent with what other clients see in the game.
++  ```function syncRides()``` :Synces all rides back with the server so that what this client sees is consistent with what other clients see in the game.
    + **Sync behavior:** Rides with final tween animation already running will be placed in a finished/not started state (no animation run). Rides with tween animations will have their first tween animation skipped and the ride will placed at its tween goal. The final tween will play if applicable. Note: coroutines for rides being synced are created here.
 
-+  **function createRideThread(rideName: String)** --This function handles coroutines for each ride when they start.
++  ```function createRideThread(rideName: String)``` :This function handles coroutines for each ride when they start.
 
 ### Contact:
 **If you have questions or issues or want to report a bug please email: ThemeParkProjectGame@Gmail.com**
