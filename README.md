@@ -1,6 +1,6 @@
 # Client-Server Flat Ride System:
 ### Overview:
-The Client-Server Flat Ride System is an open-source system I created for theme-park themed ROBLOX games.
+The Client-Server Flat Ride System is an open-source system I created for theme-park-themed ROBLOX games.
 This system is used in my own game: Theme Park Project. 
 
 The system allows for the client-side to handle all ride animations, this increases performance and eliminates latency. Additionally, this system allows clients to offload animations when they are not needed improving game performance even more.
@@ -9,13 +9,13 @@ I wanted to provide it to the Roblox community after I noticed several people ex
 As such I have opened sourced this project.
 
 ### System Info:
-* This system untilizes multi-threading.
-* Animations handled by client and not server.
+* This system utilizes multi-threading.
+* Animations are handled by the client and not the server.
 * Animation timing/monitoring managed by the server.
 * Proper client/server practices applied.
-* Plug & play: UI, camera, and ride starting/stopping is handled for all your rides automatically. Simply include them in the flatRides directory.
+* Plug & play: UI, camera, and ride starting/stopping are handled for all your rides automatically. Simply include them in the flatRides directory.
 
-## Github Code Links (This Project):
+## GitHub Code Links (This Project):
 * [Server: FlatRide_System](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ServerScriptStorage/FlatRide_System.lua)
 * [Client: Client_Flat_Ride](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/StarterPlayerScripts/Client_Flat_Ride)
 * [Module: _Camera](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ReplicatedStorage/Modules/_Camera.lua)
@@ -40,7 +40,7 @@ As such I have opened sourced this project.
 + 1: Create a new folder in the FlatRides folder in game.Workspace and give it a name. This name should be unique.
 + 2: Place the animation for the ride directly into the folder you created in the previous step.
 + 3: Make sure all parts of your flat ride are housed in a model called "Ride". This needs to be placed directly in the folder you created at step 1 of ride configuration.
-+ 4: Ensure that all instances of Seat are placed in the "Ride" model. You can have any number of seats but name them "Seat1", "Seat2", ... counting up accordingly.
++ 4: Ensure that all instances of Seat are placed in the "Ride" model. You can have any number of seats but name them "Seat1", "Seat2", ... count up accordingly.
 + 5: Ensure there is an instance of AnimationController called "AnimationController" inside the "Ride" model
 + 6: Ensure there is an instance of an Animator called "Animator" located directly inside the AnimationController mentioned in the previous step.
 + 7: Ensure you place your ride's animation in the folder you created during step one. It should be called "Animation".
@@ -114,10 +114,10 @@ directly from the server. The server handles no ride animations or tweening, thi
   
 + ```function stopRides(rideName: String)``` : Stop rides: Halts a ride from running for this client. Rides will appear as if they haven't been started.
 
-+  ```function syncRides()``` :Synces all rides back with the server so that what this client sees is consistent with what other clients see in the game.
++  ```function syncRides()``` : Synces all rides back with the server so that what this client sees is consistent with what other clients see in the game.
    + **Sync behavior:** Rides with final tween animation already running will be placed in a finished/not started state (no animation run). Rides with tween animations will have their first tween animation skipped and the ride will placed at its tween goal. The final tween will play if applicable. Note: coroutines for rides being synced are created here.
 
-+  ```function createRideThread(rideName: String)``` :This function handles coroutines for each ride when they start.
++  ```function createRideThread(rideName: String)``` : This function handles coroutines for each ride when they start.
 
 ### Contact:
 **If you have questions or issues or want to report a bug please email: ThemeParkProjectGame@Gmail.com**
