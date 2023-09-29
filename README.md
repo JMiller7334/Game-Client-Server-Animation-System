@@ -43,7 +43,7 @@ As such I have opened sourced this project.
 + 4: Ensure that all instances of Seat are placed in the "Ride" model. You can have any number of seats but name them "Seat1", "Seat2", ... count up accordingly.
 + 5: Ensure there is an instance of AnimationController called "AnimationController" inside the "Ride" model
 + 6: Ensure there is an instance of an Animator called "Animator" located directly inside the AnimationController mentioned in the previous step.
-+ 7: Ensure you place your ride's animation in the folder you created during step one. It should be called "Animation".
++ 7: Ensure you place your ride's animation in the folder you created during step 1. The animation should be named "Animation".
 
 + 8: Your ride is configured! If the system is configured it should run when your avatar sits in it.
 
