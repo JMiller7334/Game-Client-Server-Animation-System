@@ -24,8 +24,8 @@ As such I have opened sourced this project.
 * [Module: Ride_Tasks - Configurable](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ModuleTemplates%5BPlace%20into%20Client_Flat_Ride%5D/RIDE_TASK_TEMPLATE.lua)
 
 ## Related Links & Demos:
-+ **Offical Website:** [https://themeparkproject.com/pages/opensource](https://themeparkproject.com/pages/opensource.html)
-+ **Offical Game:** [https://www.roblox.com/games/636542147/Theme-Park-Project-Beta](https://www.roblox.com/games/636542147/Theme-Park-Project-Beta)
++ **Official Website:** [https://themeparkproject.com/pages/opensource](https://themeparkproject.com/pages/opensource.html)
++ **Official Game:** [https://www.roblox.com/games/636542147/Theme-Park-Project-Beta](https://www.roblox.com/games/636542147/Theme-Park-Project-Beta)
 + **Youtube Tutorial:** https://youtu.be/I-so6Pl_LNM
 
 ## Installation:
