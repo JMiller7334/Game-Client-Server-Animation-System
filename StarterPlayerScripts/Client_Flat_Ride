@@ -233,7 +233,7 @@ end
 
 
 --[[stop rides:
-Halts all rides from running for this client.
+Halts a ride from running for this client. The parameter rideName will determine the ride that is stopped.
 rides will appear as if they haven't been started.
 ]]
 function stopRides(rideName)
