@@ -18,7 +18,7 @@ As such I have opened sourced this project.
 * Plug & play: UI, camera, and ride starting/stopping are handled for all your rides automatically. Simply include them in the flatRides directory.
 
 ## GitHub Code Links (This Project):
-* [Server: FlatRide_System](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ServerScriptStorage/FlatRide_System.lua)
+* [Server: FlatRide_System](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ServerScriptService/FlatRide_System.lua)
 * [Client: Client_Flat_Ride](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/StarterPlayerScripts/Client_Flat_Ride)
 * [Module: _Camera](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ReplicatedStorage/Modules/_Camera.lua)
 * [Module: Tween_Config](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ReplicatedStorage/Modules/FlatRide_TweenConfig.lua)
