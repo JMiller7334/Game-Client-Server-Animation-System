@@ -56,7 +56,7 @@ See the scripts in the Module Templates folder for info on setting each of these
 
 + Ride Tasks (requires at least 1 Tween animation configured): Run a task parallel to a tween animation. Up to 1 task per tween.
 
-# Server-Side Documentation: [FlatRide_System](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ServerScriptStorage/FlatRide_System.lua)
+# Server-Side Documentation: [FlatRide_System](https://github.com/JMiller7334/Game-Client-Server-Animation-System/blob/main/ServerScriptService/FlatRide_System.lua)
 ### Configurable Variables:
 + ```local START_TIMER: int```  : sets the delay and countdown time before the ride begins running after a player enters it. This must have the same value as the same variable in the client-side code as well.
 + ```local MODULE_ONLY: array(string)``` : List here the names of the rides that operate using only module scripts.
