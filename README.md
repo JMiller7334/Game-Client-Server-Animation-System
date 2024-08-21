@@ -1,7 +1,7 @@
 # Client-Server Flat Ride System:
 ### Overview:
 The Client-Server Flat Ride System is an open-source system I created for theme-park-themed ROBLOX games.
-This system is used in my own game: Theme Park Project. 
+This system is used in my own game: Theme Park Project. This system is specifically designed for flat ride game models (non-roller coaster rides)
 
 It is a game animation management system tailored for optimizing animations for specific in-game models. It bridges the client-server barrier, offering solid game performance and eliminates animation latency issues.
 
